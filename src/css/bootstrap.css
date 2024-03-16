@@ -1,0 +1,22 @@
+@import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+
+/* Bootstrap */
+.nav-link.active {
+    color: #ff0000;
+  }
+  
+  h2, .h2 {
+    margin-bottom: 1.5em;
+    margin-top: 2em;
+  }
+  
+  .btn-outline-primary {
+    color: #727e86;
+    border-color: #727e86;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #727e86;
+    border-color: #727e86;
+  }
