@@ -1,3 +1,9 @@
+/**
+ * Renders the CartIcon component.
+ *
+ * @return {JSX.Element} The CartIcon component
+ */
+
 const CartIcon = () => {
   return (
     <div className="header-controls-pic header-controls-cart">

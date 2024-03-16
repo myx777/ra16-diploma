@@ -4,6 +4,12 @@ import MenuList from "./MenuList";
 import SearchIcon from "./SearchIcon";
 import "./css/style.css";
 
+/**
+ * Renders the Header component with the navigation bar, input for serach and logo.
+ *
+ * @return {JSX.Element} The rendered Header component
+ */
+
 const Header = () => {
   return (
     <header className="container">

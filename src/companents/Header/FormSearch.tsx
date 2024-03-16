@@ -1,3 +1,8 @@
+/**
+ * Renders a search input component for the header.
+ *
+ * @return {JSX.Element} The search form component.
+ */
 const FormSearch = () => {
   return (
     <form

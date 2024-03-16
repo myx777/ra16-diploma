@@ -1,3 +1,9 @@
+/**
+ * Renders a search icon component.
+ *
+ * @return {JSX.Element} The search icon component
+ */
+
 const SearchIcon = () => {
   return (
     <div
