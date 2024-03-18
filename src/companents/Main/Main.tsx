@@ -5,6 +5,7 @@ import Contacts from "./pages/Contacts";
 import Generally from "./pages/Generally";
 import Banner from "./Banner";
 import NotFound from "./pages/404";
+import "./css/style.css";
 
 const Main = () => {
   return (
