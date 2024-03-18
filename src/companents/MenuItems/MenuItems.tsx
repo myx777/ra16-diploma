@@ -1,4 +1,4 @@
-import { MenuItemType } from "../../types/menuItemTypes";
+import { MenuItemType } from "../../types/MenuItemTypes";
 
 /**
  * A function that generates the class name based on the isActive parameter.

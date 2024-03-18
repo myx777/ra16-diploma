@@ -1,4 +1,4 @@
-import { ElementCategoriesType } from "../types/CategoriesType";
+import { CategoriesType } from "../types/CategoriesType";
 import { ProductsType } from "../types/ProductsType";
 
 export type FetchType = {
@@ -8,6 +8,6 @@ export type FetchType = {
 
 export type FetchStatus = {
     isLoading: boolean;
-    data: ElementCategoriesType[] | ProductsType[] | undefined;
+    data: CategoriesType[] | ProductsType[] | undefined;
     error: unknown | null; 
 }
