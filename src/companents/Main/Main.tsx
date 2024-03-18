@@ -7,6 +7,13 @@ import Banner from "./Banner";
 import NotFound from "./pages/404";
 import "./css/style.css";
 
+/**
+ * 
+ * This is the main entry point of the application. It is responsible for rendering the routes. It also contains the logic for routing. It is also responsible for handling the navigation bar. It is also responsible for handling the banner.
+ * 
+ * @returns {JSX.Element} renders all pages
+ * 
+ */
 const Main = () => {
   return (
     <main className="container">
