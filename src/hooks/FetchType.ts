@@ -1,5 +1,3 @@
-import { CategoriesType } from "../types/CategoriesType";
-import { ProductsType } from "../types/ProductsType";
 
 export type FetchType = {
     url: string;
@@ -8,6 +6,6 @@ export type FetchType = {
 
 export type FetchStatus = {
     isLoading: boolean;
-    data: CategoriesType[] | ProductsType[] | undefined;
+    data: [] | undefined;
     error: unknown | null; 
 }
