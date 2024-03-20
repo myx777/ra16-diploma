@@ -3,7 +3,6 @@ import FormSearch from "./FormSearch";
 import MenuList from "./MenuList";
 import SearchIcon from "./SearchIcon";
 import "./css/style.css";
-
 /**
  * Renders the Header component with the navigation bar, input for serach and logo.
  *

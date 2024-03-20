@@ -1,4 +1,4 @@
-import CatalogMain from "./CatalogMain";
+import Catalog from "../Catalog/Catalog";
 import TopSales from "./TopSales";
 
 
@@ -6,7 +6,7 @@ const Generally = () => {
   return (
     <>
     <TopSales />
-    <CatalogMain />
+    <Catalog />
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import Preloader from "../../Preloader";
 import NotFound from "../404";
-import { TopSalesType } from "../../../../types/TopSalesType";
+import { CardType } from "../../../../types/CardType";
 
 /**
  * Component representing the top sales section.
@@ -34,7 +34,7 @@ const TopSales = () => {
       {error !== null && <NotFound />}
       <div className="row">
         {data &&
-          data.map((item: TopSalesType) => (
+          data.map((item: CardType) => (
             <div className="col-4" key={item.id}>
               <div className="card">
                 <img
