@@ -3,9 +3,9 @@ import useFetch from "../../../../hooks/useFetch";
 import Preloader from "../../Preloader";
 import NotFound from "../404";
 import { CategoriesType } from "../../../../types/CategoriesType";
-import { useLocation } from "react-router-dom";
 import MenuItems from "../../../MenuItems/MenuItems";
-import Card from "./Card";
+import Cards from "./Cards";
+import { NavLink, useLocation } from "react-router-dom";
 
 /**
  * Component for displaying navigation categories and product cards.
@@ -41,6 +41,7 @@ const Catalog = () => {
     id: string | number,
     event: React.MouseEvent<HTMLLIElement>
   ) => {
+
     event.preventDefault();
 
     if (id === "all") {
@@ -49,6 +50,7 @@ const Catalog = () => {
       setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?categoryId=${id}`);
     }
   };
+  console.info(location);
 
   return (
     <section className="catalog">
@@ -62,9 +64,9 @@ const Catalog = () => {
           className={location.pathname === "/" ? "nav-item active" : "nav-item"}
           onClick={(event) => handleClick("all", event)}
         >
-          <a href="#" className={"nav-link"}>
+          <NavLink to="/:1" className={"nav-link"}  >
             Все
-          </a>
+          </NavLink>
         </li>
         {/* Render other categories */}
         {data &&
@@ -72,18 +74,20 @@ const Catalog = () => {
             <li
               key={item.id}
               className={
-                location.pathname === `/${item.id}`
-                  ? "nav-item active"
-                  : "nav-item"
+                location.pathname === "/" ? "nav-item active" : "nav-item"
               }
-              onClick={(event) => handleClick(item.id, event)}
+              onClick={(event) => handleClick(item.id, event)} 
             >
-              <MenuItems label={item.title} link={"#"} />
+              <MenuItems
+                label={item.title}
+                link={`/:${item.id.toString()}`}
+   
+              />
             </li>
           ))}
       </ul>
       {/* Render product cards */}
-      <Card link={link} />
+      <Cards link={link} />
     </section>
   );
 };

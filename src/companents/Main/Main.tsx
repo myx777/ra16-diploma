@@ -6,6 +6,7 @@ import Generally from "./pages/Generally/Generally";
 import Banner from "./Banner";
 import NotFound from "./pages/404";
 import "./css/style.css";
+import CatalogPage from "./pages/CatalogPage/CatalogPage";
 
 /**
  * 
@@ -22,10 +23,11 @@ const Main = () => {
         <Banner />
           <Routes>
             <Route path="/" element={<Generally />} />
-            <Route path="/catalog.html" element={<Catalog />} />
+            <Route path="/catalog.html" element={<CatalogPage />} />
             <Route path="/about.html" element={<About />} />
             <Route path="/contacts.html" element={<Contacts />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/:id" element={<Catalog />} />
           </Routes>
         </div>
       </div>
