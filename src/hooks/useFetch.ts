@@ -7,7 +7,7 @@ import { FetchStatus } from "./FetchType";
  *   isLoading: boolean, 
  *   data: any, 
  *   error: Error | null, 
- *   fetchNow: (url: string, options?: RequestInit) => Promise<void>
+ *   fetchNow: (url: string, options?: RequestInit): Promise<void>
  * }} An object containing the current status of the request and a function to execute the request.
  */
 const useFetch = () => {
@@ -31,7 +31,7 @@ const useFetch = () => {
    * @param {RequestInit} [options] - Additional options for the fetch request.
    * @returns {Promise<void>}
    */
-  const fetchNow = async (url, options) => {
+  const fetchNow = async (url: string, options: RequestInit) => {
     setStatus((prevStatus) => ({ ...prevStatus, isLoading: true, error: null }));
 
     const response = await fetch(url, options);
