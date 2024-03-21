@@ -9,14 +9,12 @@ import Card from "./Card";
 
 const Catalog = () => {
   const [link, setLink] = useState<string>(import.meta.env.VITE_APP_ITEMS_URL);
-  const { data, isLoading, error, fetchNow } = useFetch({
-    url: import.meta.env.VITE_APP_CATEGORIES_URL,
-  });
+  const { data, isLoading, error, fetchNow } = useFetch();
 
   const location = useLocation();
 
   useEffect(() => {
-    fetchNow();
+    fetchNow(import.meta.env.VITE_APP_CATEGORIES_URL, {method: "GET"});
   }, []);
 
   const hadleClick = (

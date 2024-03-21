@@ -5,21 +5,19 @@ import Preloader from "../../Preloader";
 import NotFound from "../404";
 
 const Card = ({ link }: { link: string }) => {
+  const { data, isLoading, error, fetchNow } = useFetch();
 
-  const { data, isLoading, error, fetchNow } = useFetch({ url: link });
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
-    fetchNow();
-    console.info("fetch");
-    
+    fetchNow(link, {method: "GET"});
   }, [link]);
 
-//   useEffect(() => {
-//     if (data) {
-//       setCards(data);
-//     }
-//   }, [data]);
-
-
+  const handleLoadMore = () => {
+    const nextPageLink = `${link}?offset=${currentPage * 6}`; // Предполагается, что на странице 10 карточек
+    fetchNow(nextPageLink, {method: "GET"});
+    setCurrentPage(prevPage => prevPage + 1);
+  };
 
   if (isLoading) {
     return <Preloader />;
@@ -56,7 +54,7 @@ const Card = ({ link }: { link: string }) => {
           ))}
       </div>
       <div className="text-center">
-        <button className="btn btn-outline-primary" onClick={() => handlyCLick()}>
+        <button className="btn btn-outline-primary" onClick={handleLoadMore}>
           Загрузить ещё
         </button>
       </div>
@@ -65,6 +63,7 @@ const Card = ({ link }: { link: string }) => {
 };
 
 export default Card;
+
 /**
  * <div className="col-4">
                 <div className="card catalog-item-card">

@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { FetchStatus, FetchType } from "./FetchType";
+import { FetchStatus } from "./FetchType";
 
 /**
  * Custom hook for making network requests using the fetch API.
- * @param {Object} options - Options for the fetch request.
- * @param {string} options.url - The URL to fetch data from.
- * @param {RequestInit} [options.options] - Additional options for the fetch request.
- * @returns {Object} An object containing the current status of the request and a function to execute the request.
+ * @returns {{
+ *   isLoading: boolean, 
+ *   data: any, 
+ *   error: Error | null, 
+ *   fetchNow: (url: string, options?: RequestInit) => Promise<void>
+ * }} An object containing the current status of the request and a function to execute the request.
  */
-
-const useFetch = ({ url, options }: FetchType) => {
+const useFetch = () => {
   /**
    * State representing the status of the fetch request.
    * @type {Object}
@@ -24,7 +25,13 @@ const useFetch = ({ url, options }: FetchType) => {
     error: null,
   });
 
-  const fetchNow = async () => {
+  /**
+   * Function to execute the fetch request.
+   * @param {string} url - The URL to fetch data from.
+   * @param {RequestInit} [options] - Additional options for the fetch request.
+   * @returns {Promise<void>}
+   */
+  const fetchNow = async (url, options) => {
     setStatus((prevStatus) => ({ ...prevStatus, isLoading: true, error: null }));
 
     const response = await fetch(url, options);

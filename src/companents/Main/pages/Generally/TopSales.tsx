@@ -19,12 +19,14 @@ const TopSales = () => {
    * @property {Function} fetchNow - Function to execute the fetch.
    */
 
-  const { data, isLoading, error, fetchNow } = useFetch({
-    url: import.meta.env.VITE_APP_TOP_SALES_URL,
-  });
+  const { data, isLoading, error, fetchNow } = useFetch();
 
   useEffect(() => {
-    fetchNow();
+    fetchNow(
+      import.meta.env.VITE_APP_TOP_SALES_URL,
+      { method: "GET" },
+
+    );
   }, []);
 
   return (
