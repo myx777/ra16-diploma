@@ -15,15 +15,15 @@ const MenuList = () => {
     },
     {
       label: `Каталог`,
-      link: `/catalog.html`,
+      link: `/catalog`,
     },
     {
       label: `О магазине`,
-      link: `/about.html`,
+      link: `/about`,
     },
     {
       label: `Контакты`,
-      link: `/contacts.html`,
+      link: `/contacts`,
     },
   ];
 

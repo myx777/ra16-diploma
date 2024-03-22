@@ -53,11 +53,11 @@ const Catalog = () => {
         <ul className="catalog-categories nav justify-content-center">
           {/* Render "All" category */}
           <li
-            key={1}
+            key={"all"}
             className={"nav-item"}
             onClick={(event) => handleClick("all", event)}
           >
-            <NavLink to="/" className={"nav-link"}>
+            <NavLink to="./all" className={"nav-link"}>
               Все
             </NavLink>
           </li>

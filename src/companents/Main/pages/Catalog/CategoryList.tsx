@@ -24,8 +24,8 @@ const CategoryList: FC<CategoryListProps> = ({ data, handleClick }) => {
         className={"nav-item"}
         onClick={(event) => handleClick(item.id, event)}
       >
-        <NavLink to={`/category/${item.id}`} className={"nav-link"}>
-          {item.title}
+        <NavLink to={`${item.id}`} className={"nav-link"}>
+          {item.title} 
         </NavLink>
       </li>
     ));

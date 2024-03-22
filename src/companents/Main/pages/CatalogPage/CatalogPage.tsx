@@ -1,9 +1,11 @@
-const CatalogPage = () => {
+import Catalog from "../Catalog/Catalog";
 
-    return (
-        <>
-        </>
-    )
-}
+const CatalogPage = () => {
+  return (
+    <>
+       <Catalog />
+    </>
+  );
+};
 
 export default CatalogPage;

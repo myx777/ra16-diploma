@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import Preloader from "../../Preloader";
 import NotFound from "../404";
-import { CardType } from "../../../../types/CardType";
+import Card from "../Catalog/Card";
 
 /**
  * Component representing the top sales section.
@@ -22,11 +22,7 @@ const TopSales = () => {
   const { data, isLoading, error, fetchNow } = useFetch();
 
   useEffect(() => {
-    fetchNow(
-      import.meta.env.VITE_APP_TOP_SALES_URL,
-      { method: "GET" },
-
-    );
+    fetchNow(import.meta.env.VITE_APP_TOP_SALES_URL, { method: "GET" });
   }, []);
 
   return (
@@ -34,30 +30,7 @@ const TopSales = () => {
       <h2 className="text-center">Хиты продаж!</h2>
       {isLoading && <Preloader />}
       {error !== null && <NotFound />}
-      <div className="row">
-        {data &&
-          data.map((item: CardType) => (
-            <div className="col-4" key={item.id}>
-              <div className="card">
-                <img
-                  src={item.images[0]}
-                  alt={item.title}
-                  className="card-img-top img-fluid"
-                />
-                <div className="card-body">
-                  <p className="card-text">{item.title}</p>
-                  <p className="card-text">{item.price}</p>
-                  <a
-                    href="/products/1.html"
-                    className="btn btn-outline-primary"
-                  >
-                    Заказать
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
+      <div className="row">{data && <Card data={data} />}</div>
     </section>
   );
 };

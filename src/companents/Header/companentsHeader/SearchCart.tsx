@@ -1,7 +1,10 @@
 import CartIcon from "./CartIcon";
 import FormSearch from "./FormSearch";
 import SearchIcon from "./SearchIcon";
-
+/**
+ * Component displaying the search and cart icons
+ * @returns {JSX.Element} search, cart and form
+ */
 const SearchCart = () => {
   return (
     <div>
