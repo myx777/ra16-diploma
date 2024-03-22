@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import Preloader from "../../Preloader";
 import NotFound from "../404";
-import { CategoriesType } from "../../../../types/CategoriesType";
 import Cards from "./Cards";
 import { NavLink } from "react-router-dom";
+import CategoryList from "./CategoryList";
 
 /**
  * Component for displaying navigation categories and product cards.
@@ -62,18 +62,7 @@ const Catalog = () => {
             </NavLink>
           </li>
           {/* Render other categories */}
-          {data &&
-            data.map((item: CategoriesType) => (
-              <li
-                key={item.id}
-                className={"nav-item"}
-                onClick={(event) => handleClick(item.id, event)}
-              >
-                <NavLink to={`/category/${item.id}`} className={"nav-link"}>
-                  {item.title}
-                </NavLink>
-              </li>
-            ))}
+          {data && <CategoryList data={data} handleClick={handleClick} />}
         </ul>
       </nav>
       {/* Render product cards */}
