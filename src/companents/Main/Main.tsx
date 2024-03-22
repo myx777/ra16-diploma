@@ -22,8 +22,8 @@ const Main = () => {
         <div className="col">
           <Banner />
           <Routes>
-            <Route path="/" element={<Generally />}>
-              <Route path="/:id" element={<Catalog />} />
+            <Route path="/home" element={<Generally />}>
+              <Route path="/home/:id" element={<Catalog />} />
             </Route>
             <Route path="/catalog/" element={<CatalogPage />}>
               <Route path="/catalog/:id" element={<Catalog />} />

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
 import Preloader from "../../Preloader";
-import NotFound from "../404";
 import Cards from "./Cards";
 import { NavLink } from "react-router-dom";
 import CategoryList from "./CategoryList";
@@ -44,11 +43,15 @@ const Catalog = () => {
     }
   };
 
+  if (isLoading) {
+    return <Preloader />;
+  }
+  if (error !== null) {
+    return <Preloader />;
+  }
+
   return (
-    <section className="catalog">
-      <h2 className="text-center">Каталог</h2>
-      {isLoading && <Preloader />}
-      {error !== null && <NotFound />}
+    <>
       <nav>
         <ul className="catalog-categories nav justify-content-center">
           {/* Render "All" category */}
@@ -67,7 +70,7 @@ const Catalog = () => {
       </nav>
       {/* Render product cards */}
       <Cards link={link} />
-    </section>
+    </>
   );
 };
 
