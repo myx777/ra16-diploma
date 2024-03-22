@@ -1,7 +1,5 @@
-import CartIcon from "./CartIcon";
-import FormSearch from "./FormSearch";
-import MenuList from "./MenuList";
-import SearchIcon from "./SearchIcon";
+import MenuList from "./companentsHeader/MenuList";
+import SearchCart from "./companentsHeader/SearchCart";
 import "./css/style.css";
 /**
  * Renders the Header component with the navigation bar, input for serach and logo.
@@ -20,13 +18,7 @@ const Header = () => {
             </a>
             <div className="collapse navbar-collapse" id="navbarMain">
               <MenuList />
-              <div>
-                <div className="header-controls-pics">
-                  <SearchIcon />
-                  <CartIcon />
-                </div>
-                <FormSearch />
-              </div>
+              <SearchCart />
             </div>
           </nav>
         </div>

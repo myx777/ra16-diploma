@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import About from "./pages/About";
-import Catalog from "./pages/Catalog/Catalog";
 import Contacts from "./pages/Contacts";
 import Generally from "./pages/Generally/Generally";
 import Banner from "./Banner";
@@ -27,7 +26,7 @@ const Main = () => {
             <Route path="/about.html" element={<About />} />
             <Route path="/contacts.html" element={<Contacts />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/:id" element={<Catalog />} />
+            <Route path="/category/:id" element={<Generally />} />
           </Routes>
         </div>
       </div>

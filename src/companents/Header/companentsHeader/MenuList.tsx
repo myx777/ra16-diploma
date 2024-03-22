@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import MenuItems from "../MenuItems/MenuItems";
+import MenuItems from "../../MenuItems/MenuItems";
 /**
  * Generates a list of menu items based on the current location at the header.
  *

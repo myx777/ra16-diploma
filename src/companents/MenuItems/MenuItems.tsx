@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { MenuItemType } from "../../types/MenuItemTypes";
 
 /**
@@ -11,9 +10,9 @@ import { MenuItemType } from "../../types/MenuItemTypes";
 const MenuItems = ({ label, link }: MenuItemType) => {
 
   return (
-    <NavLink to={link} className={"nav-link"}>
+    <a href={link} className={"nav-link"}>
       {label}
-    </NavLink>
+    </a>
   );
 };
 export default MenuItems;
