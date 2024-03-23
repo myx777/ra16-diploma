@@ -12,6 +12,10 @@ import Card from "./Card";
  * @returns {JSX.Element} - Rendered product cards.
  */
 const Cards = ({ link }: { link: string }) => {
+/**
+   * State to track the current link.
+   */
+  const [currentLink, setCurrentLink] = useState(link);
   /**
    * Custom hook for fetching data.
    */
@@ -26,11 +30,6 @@ const Cards = ({ link }: { link: string }) => {
    * State to track the current page number.
    */
   const [currentPage, setCurrentPage] = useState(1);
-
-  /**
-   * State to track the current link.
-   */
-  const [currentLink, setCurrentLink] = useState(link);
 
   useEffect(() => {
     // Fetch data when the link changes.
@@ -59,6 +58,8 @@ const Cards = ({ link }: { link: string }) => {
 
     // Fetch more data with the next page link.
     fetchNow(nextPageLink, { method: "GET" });
+    console.info(nextPageLink);
+    
 
     // Update current page number.
     setCurrentPage((prevPage) => prevPage + 1);
@@ -78,6 +79,8 @@ const Cards = ({ link }: { link: string }) => {
   if (error) {
     return <NotFound />;
   }
+  
+console.info(link);
 
   return (
     <>

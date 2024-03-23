@@ -22,16 +22,17 @@ const Main = () => {
         <div className="col">
           <Banner />
           <Routes>
+
             <Route path="/home" element={<Generally />}>
-              <Route path="/home/:id" element={<Catalog />} />
+              <Route path="/home/category/:id" element={<Catalog />} />
             </Route>
+
             <Route path="/catalog/" element={<CatalogPage />}>
-              <Route path="/catalog/:id" element={<Catalog />} />
+              <Route path="/catalog/category/:id" element={<Catalog />} />
             </Route>
 
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
-
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

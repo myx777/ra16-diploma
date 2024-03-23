@@ -4,6 +4,7 @@ import Preloader from "../../Preloader/Preloader";
 import Cards from "./Cards";
 import { NavLink } from "react-router-dom";
 import CategoryList from "./CategoryList";
+import { useAppSelector } from "../../../../redux/hooks";
 
 /**
  * Component for displaying navigation categories and product cards.
@@ -20,10 +21,27 @@ const Catalog = () => {
    */
   const { data, isLoading, error, fetchNow } = useFetch();
 
+  /**
+   * State to store the search query.
+   */
+  const { finalSearch } = useAppSelector((state) => state.search);
+
+  const searchLink = finalSearch ? `q=${finalSearch}` : "";
+
   useEffect(() => {
     // Fetch categories data when component mounts.
     fetchNow(import.meta.env.VITE_APP_CATEGORIES_URL, { method: "GET" });
   }, []);
+
+  console.info(finalSearch);
+  
+  useEffect(() => {
+    // Update the link when the search query changes.
+    if(finalSearch.length > 0) {
+      setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?${searchLink}`);
+    }
+
+  }, [finalSearch]);
 
   /**
    * Handler for category click.
@@ -35,11 +53,19 @@ const Catalog = () => {
     event: React.MouseEvent<HTMLLIElement>
   ) => {
     event.preventDefault();
-
+    
     if (id === "all") {
-      setLink(import.meta.env.VITE_APP_ITEMS_URL);
+      finalSearch.length > 0
+        ? setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?${searchLink}`)
+        : setLink(`${import.meta.env.VITE_APP_ITEMS_URL}`);
     } else {
-      setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?categoryId=${id}`);
+      finalSearch.length > 0
+        ? setLink(
+            `${
+              import.meta.env.VITE_APP_ITEMS_URL
+            }?categoryId=${id}&${searchLink}`
+          )
+        : setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?categoryId=${id}`);
     }
   };
 
@@ -49,6 +75,7 @@ const Catalog = () => {
   if (error !== null) {
     return <Preloader />;
   }
+  console.info(link);
 
   return (
     <>
@@ -60,7 +87,7 @@ const Catalog = () => {
             className={"nav-item"}
             onClick={(event) => handleClick("all", event)}
           >
-            <NavLink to="./all" className={"nav-link"}>
+            <NavLink to="./category/all" className={"nav-link"}>
               Все
             </NavLink>
           </li>

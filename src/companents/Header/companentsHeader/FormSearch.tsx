@@ -44,7 +44,7 @@ const FormSearch = ({ isVisible }: { isVisible: boolean }): JSX.Element => {
       <input
         className="form-control"
         placeholder="Поиск"
-        type="search"
+        type="text"
         value={search}
         onChange={handleChange}
       />

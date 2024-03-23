@@ -2,44 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 import { InitialStateType } from "../types/InitialStateType";
 
 const initialState: InitialStateType = {
-  items: [],
-  loading: false,
-  error: null,
   search: "",
+  finalSearch: "",
 };
 
 const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    searchProductRequest(state) {
-      console.info(state);
-
-      state.loading = true;
-      state.error = null;
-    },
-    searchProductSuccess(state, action) {
-      console.info(action);
-
-      state.loading = false;
-      state.error = null;
-      state.items = action.payload;
-    },
-    searchProductFailure(state, action) {
-      console.info(action);
-
-      state.loading = false;
-      state.error = action.payload.error;
-    },
+    //reducer for prompting search field
     changeSearchField(state, action) {
-      console.info(action);
-      console.info(state);
-
       state.search = action.payload;
+    },
+    // reducer for full search field
+    fullSearchField(state, action) {
+        state.finalSearch = action.payload;
     },
   },
 });
 
-export const { searchProductRequest, searchProductSuccess, searchProductFailure, changeSearchField } = searchSlice.actions;
+export const { changeSearchField, fullSearchField } = searchSlice.actions;
 
 export default searchSlice.reducer;

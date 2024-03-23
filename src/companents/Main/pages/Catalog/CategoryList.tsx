@@ -13,6 +13,7 @@ import Preloader from "../../Preloader/Preloader";
  * @returns {JSX.Element} - Rendered Category List
  */
 const CategoryList: FC<CategoryListProps> = ({ data, handleClick }) => {
+
   /**
    * Function for rendering the Category List and caching the data
    */
@@ -24,7 +25,7 @@ const CategoryList: FC<CategoryListProps> = ({ data, handleClick }) => {
         className={"nav-item"}
         onClick={(event) => handleClick(item.id, event)}
       >
-        <NavLink to={`${item.id}`} className={"nav-link"}>
+        <NavLink to={`./category/${item.id}`} className={"nav-link"}>
           {item.title} 
         </NavLink>
       </li>
