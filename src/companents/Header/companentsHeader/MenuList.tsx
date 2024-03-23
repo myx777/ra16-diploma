@@ -26,8 +26,7 @@ const MenuList = () => {
       link: `/contacts`,
     },
   ];
-console.info(location);
-
+  
   return (
     <ul className="navbar-nav mr-auto">
       {items.map(({ label, link }) => (

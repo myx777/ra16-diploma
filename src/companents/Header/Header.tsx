@@ -1,5 +1,5 @@
 import MenuList from "./companentsHeader/MenuList";
-import SearchCart from "./companentsHeader/SearchCart";
+import SearchAndCart from "./companentsHeader/SearchAndCart";
 import "./css/style.css";
 /**
  * Renders the Header component with the navigation bar, input for serach and logo.
@@ -18,7 +18,7 @@ const Header = () => {
             </a>
             <div className="collapse navbar-collapse" id="navbarMain">
               <MenuList />
-              <SearchCart />
+              <SearchAndCart />
             </div>
           </nav>
         </div>
