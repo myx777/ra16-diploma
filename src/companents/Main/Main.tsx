@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import Generally from "./pages/Generally/Generally";
-import Banner from "./Banner";
+import Banner from "./Banner/Banner";
 import NotFound from "./pages/404";
 import "./css/style.css";
 import CatalogPage from "./pages/CatalogPage/CatalogPage";

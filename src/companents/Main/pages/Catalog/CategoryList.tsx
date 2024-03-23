@@ -4,7 +4,7 @@ import {
   CategoryListProps,
 } from "../../../../types/CategoriesType";
 import { FC, useCallback } from "react";
-import Preloader from "../../Preloader";
+import Preloader from "../../Preloader/Preloader";
 
 /**
  * Companents for displaying the Category List

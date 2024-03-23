@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../../../hooks/useFetch";
-import Preloader from "../../Preloader";
+import Preloader from "../../Preloader/Preloader";
 import Cards from "./Cards";
 import { NavLink } from "react-router-dom";
 import CategoryList from "./CategoryList";

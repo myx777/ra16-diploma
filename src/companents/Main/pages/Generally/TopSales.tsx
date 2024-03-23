@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useFetch from "../../../../hooks/useFetch";
-import Preloader from "../../Preloader";
+import Preloader from "../../Preloader/Preloader";
 import NotFound from "../404";
 import Card from "../Catalog/Card";
 
