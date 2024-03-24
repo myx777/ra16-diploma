@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { changeSearchField } from "../../../reducer/searchSlice";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { changeSearchField } from "../../../reducers/searchSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { useEffect } from "react";
 
 /**

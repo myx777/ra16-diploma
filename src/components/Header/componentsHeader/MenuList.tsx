@@ -11,7 +11,7 @@ const MenuList = () => {
   const items = [
     {
       label: `Главная`,
-      link: `/home`,
+      link: `/`,
     },
     {
       label: `Каталог`,
@@ -26,13 +26,14 @@ const MenuList = () => {
       link: `/contacts`,
     },
   ];
+  console.info(location);
   
   return (
     <ul className="navbar-nav mr-auto">
       {items.map(({ label, link }) => (
         <li
           key={label}
-          className={`nav-item ${location.pathname.startsWith(link) ? 'active' : ''}`}
+          className={`nav-item ${location.pathname === link ? 'active' : ''}`}
           
         >
           <MenuItems label={label} link={link} />

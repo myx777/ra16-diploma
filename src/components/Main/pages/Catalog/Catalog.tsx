@@ -4,7 +4,7 @@ import Preloader from "../../Preloader/Preloader";
 import Cards from "./Cards";
 import { NavLink } from "react-router-dom";
 import CategoryList from "./CategoryList";
-import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../store/hooks";
 
 /**
  * Component for displaying navigation categories and product cards.
@@ -34,13 +34,12 @@ const Catalog = () => {
   }, []);
 
   console.info(finalSearch);
-  
+
   useEffect(() => {
     // Update the link when the search query changes.
-    if(finalSearch.length > 0) {
+    if (finalSearch.length > 0) {
       setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?${searchLink}`);
     }
-
   }, [finalSearch]);
 
   /**
@@ -53,7 +52,7 @@ const Catalog = () => {
     event: React.MouseEvent<HTMLLIElement>
   ) => {
     event.preventDefault();
-    
+
     if (id === "all") {
       finalSearch.length > 0
         ? setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?${searchLink}`)
@@ -75,7 +74,6 @@ const Catalog = () => {
   if (error !== null) {
     return <Preloader />;
   }
-  console.info(link);
 
   return (
     <>
@@ -87,7 +85,7 @@ const Catalog = () => {
             className={"nav-item"}
             onClick={(event) => handleClick("all", event)}
           >
-            <NavLink to="./category/all" className={"nav-link"}>
+           <NavLink to={location.pathname.includes(`catalog`) ? `./category/all` : `/`} className={"nav-link"}>
               Все
             </NavLink>
           </li>

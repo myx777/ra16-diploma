@@ -1,4 +1,6 @@
+import { setProduct } from "../../../../reducers/productsSlice";
 import { CardType } from "../../../../types/CardType";
+import { useAppDispatch } from "../../../../store/hooks";
 
 /**
  * Component to render a single card.
@@ -7,6 +9,14 @@ import { CardType } from "../../../../types/CardType";
  * @returns {JSX.Element} - Rendered card component.
  */
 const Card = ({ data }: { data: CardType[] }) => {
+
+  const dispatch = useAppDispatch();
+
+  const handleClick = (id: number, event) => {
+    // event.preventDefault()
+    dispatch(setProduct(id));
+  };
+
   return (
     <>
       {data.map((item) => (
@@ -24,7 +34,11 @@ const Card = ({ data }: { data: CardType[] }) => {
             <div className="card-body">
               <p className="card-text">{item.title}</p>
               <p className="card-text">{item.price}</p>
-              <a href="/products/1.html" className="btn btn-outline-primary">
+              <a
+                href={`/product/${item.id}`}
+                className="btn btn-outline-primary"
+                onClick={() => handleClick(item.id, event)}
+              >
                 Заказать
               </a>
             </div>

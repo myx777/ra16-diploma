@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import {
   changeSearchField,
   fullSearchField,
-} from "../../../../reducer/searchSlice";
+} from "../../../../reducers/searchSlice";
 import { useEffect, useState } from "react";
 /**
  * Component for entering search query.

@@ -12,7 +12,7 @@ import Card from "./Card";
  * @returns {JSX.Element} - Rendered product cards.
  */
 const Cards = ({ link }: { link: string }) => {
-/**
+  /**
    * State to track the current link.
    */
   const [currentLink, setCurrentLink] = useState(link);
@@ -52,14 +52,14 @@ const Cards = ({ link }: { link: string }) => {
    * Handler for loading more product cards.
    */
   const handleLoadMore = () => {
+    const numberProductsToDownload = 6;
+
     const nextPageLink = link.includes("categoryId")
-      ? `${link}&offset=${currentPage * 6}`
-      : `${link}?offset=${currentPage * 6}`;
+      ? `${link}&offset=${currentPage * numberProductsToDownload}`
+      : `${link}?offset=${currentPage * numberProductsToDownload}`;
 
     // Fetch more data with the next page link.
     fetchNow(nextPageLink, { method: "GET" });
-    console.info(nextPageLink);
-    
 
     // Update current page number.
     setCurrentPage((prevPage) => prevPage + 1);
@@ -79,8 +79,6 @@ const Cards = ({ link }: { link: string }) => {
   if (error) {
     return <NotFound />;
   }
-  
-console.info(link);
 
   return (
     <>

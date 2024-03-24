@@ -7,6 +7,7 @@ import NotFound from "./pages/404";
 import "./css/style.css";
 import CatalogPage from "./pages/CatalogPage/CatalogPage";
 import Catalog from "./pages/Catalog/Catalog";
+import Product from "./pages/Product";
 
 /**
  *
@@ -23,8 +24,8 @@ const Main = () => {
           <Banner />
           <Routes>
 
-            <Route path="/home" element={<Generally />}>
-              <Route path="/home/category/:id" element={<Catalog />} />
+            <Route path="/" element={<Generally />}>
+              <Route path="/category/:id" element={<Catalog />} />
             </Route>
 
             <Route path="/catalog/" element={<CatalogPage />}>
@@ -33,6 +34,7 @@ const Main = () => {
 
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/product/:id" element={<Product />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -13,7 +13,7 @@ const Header = () => {
       <div className="row">
         <div className="col">
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
-            <a className="navbar-brand" href="/home">
+            <a className="navbar-brand" href="/">
               <img src="/src/assets/img/header-logo.png" alt="Bosa Noga"></img>
             </a>
             <div className="collapse navbar-collapse" id="navbarMain">
