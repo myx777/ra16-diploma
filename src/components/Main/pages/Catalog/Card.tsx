@@ -1,6 +1,7 @@
 import { setProduct } from "../../../../reducers/productsSlice";
 import { CardType } from "../../../../types/CardType";
 import { useAppDispatch } from "../../../../store/hooks";
+import { useCallback } from "react";
 
 /**
  * Component to render a single card.
@@ -17,36 +18,32 @@ const Card = ({ data }: { data: CardType[] }) => {
     dispatch(setProduct(id));
   };
 
-  return (
-    <>
-      {data.map((item) => (
-        <div className="col-4" key={item.id}>
-          <div
-            className="card catalog-item-card"
-            style={{ maxHeight: "450px" }}
-          >
-            <img
-              className="card-img-top img-fluid"
-              src={item.images[0]}
-              alt={item.title}
-              style={{ height: "300px", overflow: "hidden", margin: "auto" }}
-            />
-            <div className="card-body">
-              <p className="card-text">{item.title}</p>
-              <p className="card-text">{item.price}</p>
-              <a
-                href={`/product/${item.id}`}
-                className="btn btn-outline-primary"
-                onClick={() => handleClick(item.id, event)}
-              >
-                Заказать
-              </a>
-            </div>
+  const renderCards = useCallback(() => {
+    return data.map((item) => (
+      <div className="col-4" key={item.id}>
+        <div className="card catalog-item-card" style={{ maxHeight: "450px" }}>
+          <img
+            className="card-img-top img-fluid"
+            src={item.images[0]}
+            alt={item.title}
+            style={{ height: "300px", overflow: "hidden", margin: "auto" }}
+          />
+          <div className="card-body">
+            <p className="card-text">{item.title}</p>
+            <p className="card-text">{item.price}</p>
+            <a
+              href={`/product/${item.id}`}
+              className="btn btn-outline-primary"
+              onClick={() => handleClick(item.id, event)}
+            >
+              Заказать
+            </a>
           </div>
         </div>
-      ))}
-    </>
-  );
+      </div>
+    ));
+  }, [data]);
+  return <>{renderCards()}</>;
 };
 
 export default Card;
