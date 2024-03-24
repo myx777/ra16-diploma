@@ -1,5 +1,5 @@
-import MenuList from "./companentsHeader/MenuList";
-import SearchAndCart from "./companentsHeader/SearchAndCart";
+import MenuList from "./componentsHeader/MenuList";
+import SearchAndCart from "./componentsHeader/SearchAndCart";
 import "./css/style.css";
 /**
  * Renders the Header component with the navigation bar, input for serach and logo.

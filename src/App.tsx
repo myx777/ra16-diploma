@@ -1,6 +1,6 @@
-import Footer from "./companents/Footer/Footer";
-import Header from "./companents/Header/Header";
-import Main from "./companents/Main/Main";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
 import "./App.css";
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 

@@ -1,22 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitialStateType } from "../types/InitialStateType";
 
+/**
+ * Initial state for the searchSlice
+ * @type {InitialStateType}
+ */
 const initialState: InitialStateType = {
   search: "",
   finalSearch: "",
 };
 
+/**
+ * Redux slice for managing search state.
+ */
 const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    //reducer for prompting search field
-    changeSearchField(state, action) {
+    /**
+     * Reducer for updating the search field.
+     * @param {InitialStateType} state - The current state.
+     * @param {PayloadAction<string>} action - The action containing the search value payload.
+     */
+    changeSearchField(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
-    // reducer for full search field
-    fullSearchField(state, action) {
-        state.finalSearch = action.payload;
+    /**
+     * Reducer for setting the full search query.
+     * @param {InitialStateType} state - The current state.
+     * @param {PayloadAction<string>} action - The action containing the full search query payload.
+     */
+    fullSearchField(state, action: PayloadAction<string>) {
+      state.finalSearch = action.payload;
     },
   },
 });
