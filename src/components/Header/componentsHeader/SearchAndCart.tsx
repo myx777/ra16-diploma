@@ -1,6 +1,6 @@
-
-import { useState } from "react";
-import FormSearch from "./FormSearch";
+import { useEffect, useState } from 'react';
+import FormSearch from './FormSearch';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Component displaying the search and cart icons
@@ -9,10 +9,22 @@ import FormSearch from "./FormSearch";
 const SearchAndCart = () => {
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const navigate = useNavigate();
+
+  const count = localStorage.length;
 
   const toggleSearchForm = () => {
     setIsVisible(!isVisible);
-  }
+    if (searchValue) {
+      navigate(`/catalog/${searchValue}`, { state: searchValue });
+    }
+  };
+
+  const handleClick = () => {
+    navigate('/cart');
+  };
 
   return (
     <div>
@@ -22,12 +34,12 @@ const SearchAndCart = () => {
           className="header-controls-pic header-controls-search"
           onClick={toggleSearchForm}
         ></div>
-        <div className="header-controls-pic header-controls-cart">
-          <div className="header-controls-cart-full">1</div>
+        <div className="header-controls-pic header-controls-cart" onClick={() => handleClick()}>
+          <div className="header-controls-cart-full">{count}</div>
           <div className="header-controls-cart-menu"></div>
         </div>
       </div>
-      <FormSearch isVisible={isVisible}/>
+      <FormSearch isVisible={isVisible} toggleVisibility={toggleSearchForm} state={setSearchValue} />
     </div>
   );
 };

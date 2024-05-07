@@ -1,19 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { changeSearchField } from "../../../reducers/searchSlice";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { useEffect } from "react";
+import React from 'react';
 
 /**
  * Renders a search input component for the header.
  *
  * @param {Object} props - The props object.
  * @param {boolean} props.isVisible - Flag indicating whether the search form is visible.
- * @returns {JSX.Element} The search form component.
+ * @returns {React.Element} The search form component.
  */
-const FormSearch = ({ isVisible }: { isVisible: boolean }): JSX.Element => {
-  const { search } = useAppSelector((state) => state.search);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+const FormSearch = ({ isVisible, toggleVisibility, state }: {
+  isVisible: boolean,
+  toggleVisibility:
+    () =>
+      void,
+  state: (value: string) => void,
+}) => {
 
   /**
    * Handles the change event of the search input.
@@ -24,28 +24,26 @@ const FormSearch = ({ isVisible }: { isVisible: boolean }): JSX.Element => {
    */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
-    dispatch(changeSearchField(value));
+    state(value);
   };
 
-  useEffect(() => {
-    // If search input is not empty and search form is invisible, navigate to catalog
-    if (search !== "" && !isVisible) {
-      navigate(`/catalog/`);
-    }
-  }, [search, isVisible, navigate]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    toggleVisibility();
+  };
 
   return (
     <form
+      onSubmit={handleSubmit}
       data-id="search-form"
       className={`header-controls-search-form form-inline ${
-        isVisible ? "" : "invisible"
+        isVisible ? '' : 'invisible'
       }`}
     >
       <input
         className="form-control"
         placeholder="Поиск"
         type="text"
-        value={search}
         onChange={handleChange}
       />
     </form>

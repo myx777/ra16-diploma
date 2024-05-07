@@ -1,62 +1,51 @@
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import {
-  changeSearchField,
-  fullSearchField,
-} from "../../../../reducers/searchSlice";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+
 /**
  * Component for entering search query.
  * @returns {JSX.Element} Search component
  */
 const Search = () => {
-    /**
-     * Local state for search input value.
-     */
-  const [valueSafe, setValueSafe] = useState("");
+    const [state, setState] = useState("");
+
+    const {search} = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (search !== undefined && search !== null && search !== "") {
+            setState(search);
+        }
+    }, [search]);
 
     /**
-     * If the store has a value for search, show it.
+     * Handler for input change event.
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The input change event.
      */
-  const { search } = useAppSelector((state) => state.search);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = event.target;
+        setState(value);
+    };
 
-  
-  useEffect(() => {
-    setValueSafe(search);
-  }, []);
+    /**
+     * Handler for form submit event.
+     * @param {React.FormEvent<HTMLFormElement>} event - The form submit event.
+     */
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        navigate(`/catalog/${state}`);
+        setState("");
+    };
 
-  const dispatch = useAppDispatch();
-
-  /**
-   * Handler for input change event.
-   * @param {React.ChangeEvent<HTMLInputElement>} event - The input change event.
-   */
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    dispatch(changeSearchField(value));
-    setValueSafe(value);
-  };
-
-  /**
-   * Handler for form submit event.
-   * @param {React.FormEvent<HTMLFormElement>} event - The form submit event.
-   */
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch(fullSearchField(search));
-    dispatch(changeSearchField(""));
-  };
-
-  return (
-    <form className="catalog-search-form form-inline" onSubmit={handleSubmit}>
-      <input
-        className="form-control"
-        placeholder="Поиск"
-        value={valueSafe}
-        onChange={handleChange}
-      />
-    </form>
-  );
+    return (
+        <form className="catalog-search-form form-inline" onSubmit={handleSubmit}>
+            <input
+                className="form-control"
+                placeholder="Поиск"
+                value={state}
+                onChange={handleChange}
+            />
+        </form>
+    );
 };
 
 export default Search;

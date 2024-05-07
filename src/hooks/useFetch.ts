@@ -21,7 +21,7 @@ const useFetch = () => {
 
   const [status, setStatus] = useState<FetchStatus>({
     isLoading: true,
-    data: undefined,
+    data: [],
     error: null,
   });
 
