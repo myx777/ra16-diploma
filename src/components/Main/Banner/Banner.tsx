@@ -1,4 +1,5 @@
-import "./css/bannerStyle.css";
+import './css/bannerStyle.css';
+
 /**
  * Renders a banner component with an image after the header on all pages.
  *

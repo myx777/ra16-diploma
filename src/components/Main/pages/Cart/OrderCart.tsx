@@ -4,17 +4,28 @@ import useFetch from '../../../../hooks/useFetch.ts';
 import Preloader from '../../Preloader/Preloader.tsx';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * формирует форму отправки заказа
+ *
+ *
+ * @param data - массив карточек товаров
+ * @constructor
+ */
 const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
+  // состояние для проверки корректности телефона
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
+  // состояние чекбокса
   const [isChecked, setIsChecked] = useState(false);
+  // состояние модалки для чекбокса
   const [showModal, setShowModal] = useState(false);
+  // состояние запроса
   const [isRequesting, setIsRequesting] = useState(false);
 
   const { error, fetchNow } = useFetch();
   const navigate = useNavigate();
 
-  const handlePhoneChange = (e) => {
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPhone(value);
     if (!/^(\+?\d{1,3}[- ]?)?\d{10}$/.test(value)) {
@@ -24,7 +35,7 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
     }
   };
 
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
   };
 
@@ -32,9 +43,9 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
     e.preventDefault();
     if (isChecked) {
       setIsRequesting(true);
-
-      const phone = e.target.phone.value;
-      const address = e.target.address.value;
+      const form = e.currentTarget as HTMLFormElement;
+      const phone: string = form.phone.value;
+      const address: string = form.address.value;
 
       const orderData = {
         owner: {
@@ -112,7 +123,7 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
       </div>
 
       {showModal && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+        <div className="modal" tabIndex={-1} role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">

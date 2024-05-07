@@ -1,4 +1,4 @@
-import MenuItems from "../../MenuItems/MenuItems";
+import MenuItems from '../../MenuItems/MenuItems';
 
 /**
  * Renders a navigation footer with a list of navigation items.

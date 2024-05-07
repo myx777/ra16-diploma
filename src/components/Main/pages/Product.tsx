@@ -105,7 +105,8 @@ const Product = () => {
                             style={{ cursor: 'pointer' }}
                             className={`catalog-item-size ${selectedSize === item.size ? 'selected' : ''}`}
                           >{item.size}</span>
-                        );}
+                        );
+                      }
                     },
                   )}
                 </p>

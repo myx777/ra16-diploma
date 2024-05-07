@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FormSearch from './FormSearch';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,8 +35,12 @@ const SearchAndCart = () => {
           onClick={toggleSearchForm}
         ></div>
         <div className="header-controls-pic header-controls-cart" onClick={() => handleClick()}>
-          <div className="header-controls-cart-full">{count}</div>
-          <div className="header-controls-cart-menu"></div>
+          {count > 0 ? (
+            <>
+              <div className="header-controls-cart-full">{count}</div>
+              <div className="header-controls-cart-menu"></div>
+            </>
+          ) : null}
         </div>
       </div>
       <FormSearch isVisible={isVisible} toggleVisibility={toggleSearchForm} state={setSearchValue} />

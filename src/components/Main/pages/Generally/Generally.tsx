@@ -1,5 +1,5 @@
-import Catalog from "../Catalog/Catalog";
-import TopSales from "./TopSales";
+import Catalog from '../Catalog/Catalog';
+import TopSales from './TopSales';
 
 const Generally = () => {
   return (

@@ -1,8 +1,9 @@
-import Catalog from "../Catalog/Catalog";
-import Search from "./Search";
+import Catalog from '../Catalog/Catalog';
+import Search from './Search';
+
 /**
  * Component for displaying the catalog page.
- * 
+ *
  * @returns {JSX.Element}  The catalog page.
  */
 const CatalogPage = () => {

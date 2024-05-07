@@ -1,4 +1,4 @@
-import { MenuItemType } from "../../types/MenuItemTypes";
+import { MenuItemType } from '../../types/MenuItemTypes';
 
 /**
  * Component for a menu item.
@@ -11,7 +11,7 @@ import { MenuItemType } from "../../types/MenuItemTypes";
 const MenuItems = ({ label, link }: MenuItemType) => {
 
   return (
-    <a href={link} className={"nav-link"}>
+    <a href={link} className={'nav-link'}>
       {label}
     </a>
   );

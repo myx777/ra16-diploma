@@ -1,8 +1,8 @@
-import ContactsFooter from "./companentsFooter/ContactsFooter";
-import Copyright from "./companentsFooter/Coptright";
-import "./css/style.css";
-import NavigationFooter from "./companentsFooter/NavigationFooter";
-import PayMethods from "./companentsFooter/PayMethods";
+import ContactsFooter from './companentsFooter/ContactsFooter';
+import Copyright from './companentsFooter/Coptright';
+import './css/style.css';
+import NavigationFooter from './companentsFooter/NavigationFooter';
+import PayMethods from './companentsFooter/PayMethods';
 
 /**
  * Renders the footer component with navigation, payment methods, copyright, and contact information.

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import useFetch from "../../../../hooks/useFetch";
-import { CardType } from "../../../../types/CardType";
-import Preloader from "../../Preloader/Preloader";
-import NotFound from "../404";
-import Card from "./Card";
+import { useEffect, useState } from 'react';
+import useFetch from '../../../../hooks/useFetch';
+import { CardType } from '../../../../types/CardType';
+import Preloader from '../../Preloader/Preloader';
+import NotFound from '../404';
+import Card from './Card';
 
 /**
  * Component to display product cards fetched from a specified category.
@@ -33,7 +33,7 @@ const Cards = ({ link }: { link: string }) => {
 
   useEffect(() => {
     // Fetch data when the link changes.
-    fetchNow(link, { method: "GET" });
+    fetchNow(link, { method: 'GET' });
     // setAllCards((prevCards) => [...prevCards, ...data]);
   }, [link]);
 
@@ -54,12 +54,12 @@ const Cards = ({ link }: { link: string }) => {
   const handleLoadMore = () => {
     const numberProductsToDownload = 6;
 
-    const nextPageLink = link.includes("categoryId")
+    const nextPageLink = link.includes('categoryId')
       ? `${link}&offset=${currentPage * numberProductsToDownload}`
       : `${link}?offset=${currentPage * numberProductsToDownload}`;
 
     // Fetch more data with the next page link.
-    fetchNow(nextPageLink, { method: "GET" });
+    fetchNow(nextPageLink, { method: 'GET' });
 
     // Update current page number.
     setCurrentPage((prevPage) => prevPage + 1);
