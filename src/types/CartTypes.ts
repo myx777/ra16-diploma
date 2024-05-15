@@ -6,10 +6,6 @@ export type ProductCartType = {
   selectedSize: number;
 }
 
-export type ProductsCartType = {
-  data: ProductCartType[];
-}
-
 export type ProductsPropsCart = {
   data: ProductCartType[];
   handleDelete: (id: number) => void;

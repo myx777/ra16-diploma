@@ -1,16 +1,15 @@
 import { setProduct } from '../../../../reducers/productsSlice';
-import { CardType } from '../../../../types/CardType';
 import { useAppDispatch } from '../../../../store/hooks';
 import { useCallback } from 'react';
+import { ProductsType } from '../../../../types/ProductsType.ts';
 
 /**
  * Component to render a single card.
  * @param {Object} props - Component props (productncard).
- * @param {CardType[]} props.data - Array of card data.
+ * @param {ProductsType[]} props.data - Array of card data.
  * @returns {JSX.Element} - Rendered card component.
  */
-const Card = ({ data }: { data: CardType[] }) => {
-
+const Card = ({ data }: { data: ProductsType[] }) => {
   const dispatch = useAppDispatch();
 
   const handleClick = (id: number) => {

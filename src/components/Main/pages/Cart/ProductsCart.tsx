@@ -20,20 +20,17 @@ const ProductsCart: React.FC<ProductsPropsCart> = ({ data, handleDelete }) => {
         </thead>
         <tbody>
         {data.map((item, index) => (
-          <>
-            <tr key={index}>
-              <td scope="row">{index + 1}</td>
-              <td><a href={`/product/${item.id}`}>{item.title}</a></td>
-              <td>{item.selectedSize}</td>
-              <td>{item.count}</td>
-              <td>{item.price} руб.</td>
-              <td>{item.price * item.count} руб.</td>
-              <td>
-                <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(item.id)}>Удалить</button>
-              </td>
-            </tr>
-
-          </>
+          <tr key={item.id}>
+            <td scope="row">{index + 1}</td>
+            <td><a href={`/product/${item.id}`}>{item.title}</a></td>
+            <td>{item.selectedSize}</td>
+            <td>{item.count}</td>
+            <td>{item.price} руб.</td>
+            <td>{isNaN(item.price * item.count) ? 'Ошибка' : (item.price * item.count)} руб.</td>
+            <td>
+              <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(item.id)}>Удалить</button>
+            </td>
+          </tr>
         ))}
         <tr>
           <td colSpan={5} className="text-right">Общая стоимость

@@ -13,7 +13,7 @@ const SearchAndCart = () => {
 
   const navigate = useNavigate();
 
-  const count = localStorage.length;
+  const ls = localStorage.getItem('bosonoga');
 
   const toggleSearchForm = () => {
     setIsVisible(!isVisible);
@@ -35,9 +35,9 @@ const SearchAndCart = () => {
           onClick={toggleSearchForm}
         ></div>
         <div className="header-controls-pic header-controls-cart" onClick={() => handleClick()}>
-          {count > 0 ? (
+          { ls !== null ? (
             <>
-              <div className="header-controls-cart-full">{count}</div>
+              <div className="header-controls-cart-full">{JSON.parse(ls).length}</div>
               <div className="header-controls-cart-menu"></div>
             </>
           ) : null}

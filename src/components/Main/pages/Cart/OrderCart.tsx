@@ -1,8 +1,10 @@
-import { ProductsPropsCartForm } from '../../../../types/CartTypes.ts';
 import React, { useState } from 'react';
 import useFetch from '../../../../hooks/useFetch.ts';
-import Preloader from '../../Preloader/Preloader.tsx';
 import { useNavigate } from 'react-router-dom';
+import { ProductsPropsCartForm } from '../../../../types/CartTypes.ts';
+// доп библиотечка для телефонного номера
+import ReactPhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 /**
  * формирует форму отправки заказа
@@ -12,44 +14,34 @@ import { useNavigate } from 'react-router-dom';
  * @constructor
  */
 const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
-  // состояние для проверки корректности телефона
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
-  // состояние чекбокса
   const [isChecked, setIsChecked] = useState(false);
-  // состояние модалки для чекбокса
   const [showModal, setShowModal] = useState(false);
-  // состояние запроса
-  const [isRequesting, setIsRequesting] = useState(false);
-
-  const { error, fetchNow } = useFetch();
+  const [form, setForm] = useState(false);
   const navigate = useNavigate();
+  const { error, fetchNow } = useFetch();
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handlePhoneChange = (value: string) => {
     setPhone(value);
-    if (!/^(\+?\d{1,3}[- ]?)?\d{10}$/.test(value)) {
+    if (value && !/^(\+?\d{1,3}[- ]?)?\d{10}$/.test(value)) {
       setPhoneError('Неправильный формат телефонного номера');
     } else {
       setPhoneError('');
     }
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(e.target.checked);
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isChecked) {
-      setIsRequesting(true);
+
+    if (isChecked && phoneError.length === 0 && phone.length > 7 && e.currentTarget.address.value.length > 5) {
       const form = e.currentTarget as HTMLFormElement;
-      const phone: string = form.phone.value;
+      const phoneToSend = phone.startsWith('+7') ? phone.replace('+7', '7') : `7${phone}`;
       const address: string = form.address.value;
 
       const orderData = {
         owner: {
-          phone,
+          phone: phoneToSend,
           address,
         },
         items: data.map((item) => ({
@@ -68,8 +60,6 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
           body: JSON.stringify(orderData),
         });
 
-        setIsRequesting(false);
-
         setShowModal(true);
         setIsChecked(false);
         localStorage.clear();
@@ -78,10 +68,10 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
       } catch (error) {
         console.error('Ошибка:', error);
         setShowModal(true);
-        setIsRequesting(false);
       }
     } else {
       setShowModal(true);
+      setForm(true);
     }
   };
 
@@ -92,10 +82,13 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
         <form className="card-body" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="phone">Телефон</label>
-            <input
-              className="form-control"
-              id="phone"
-              placeholder="Ваш телефон"
+            <ReactPhoneInput
+              inputProps={{
+                name: 'phone',
+                required: true,
+                autoFocus: true,
+              }}
+              country={'ru'}
               value={phone}
               onChange={handlePhoneChange}
             />
@@ -110,14 +103,14 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
               type="checkbox"
               className="form-check-input"
               id="agreement"
-              onChange={handleCheckboxChange}
+              onChange={(e) => setIsChecked(e.target.checked)}
             />
             <label className="form-check-label" htmlFor="agreement">
               Согласен с правилами доставки
             </label>
           </div>
           <button type="submit" className="btn btn-outline-secondary">
-            {isRequesting ? <Preloader /> : 'Оформить'}
+            Оформить
           </button>
         </form>
       </div>
@@ -127,7 +120,7 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">{error ? 'Ошибка!' : 'Успех!'}</h5>
+                <h5 className="modal-title">{error ? 'Ошибка!' : form ? 'Ошибка!' : 'Успех!'}</h5>
                 <button type="button" className="close" onClick={() => setShowModal(false)}>
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,11 +133,17 @@ const OrderCart: React.FC<ProductsPropsCartForm> = ({ data }) => {
                     Закрыть
                   </button>
                 </>
+              ) : form ? (
+                <>
+                  <div className="modal-body">Пожалуйста, заполните все поля!</div>
+                  <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
+                    Закрыть
+                  </button>
+                </>
               ) : (
                 <div className="modal-body">Заказ успешно оформлен!</div>
               )}
-              <div className="modal-footer">
-              </div>
+              <div className="modal-footer"></div>
             </div>
           </div>
         </div>

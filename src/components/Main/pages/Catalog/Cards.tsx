@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import useFetch from '../../../../hooks/useFetch';
-import { CardType } from '../../../../types/CardType';
 import Preloader from '../../Preloader/Preloader';
 import NotFound from '../404';
 import Card from './Card';
+import { ProductsType } from '../../../../types/ProductsType.ts';
 
 /**
  * Component to display product cards fetched from a specified category.
@@ -19,12 +19,12 @@ const Cards = ({ link }: { link: string }) => {
   /**
    * Custom hook for fetching data.
    */
-  const { data, isLoading, error, fetchNow } = useFetch();
+  const { data, isLoading, error, fetchNow } = useFetch<ProductsType[]>();
 
   /**
    * State to store all fetched cards.
    */
-  const [allCards, setAllCards] = useState<CardType[]>([]);
+  const [allCards, setAllCards] = useState<ProductsType[]>([]);
 
   /**
    * State to track the current page number.
@@ -38,8 +38,8 @@ const Cards = ({ link }: { link: string }) => {
   }, [link]);
 
   useEffect(() => {
-    if (data) {
-      const newCards = data.filter((card: CardType) => {
+    if (data && Array.isArray(data)) {
+      const newCards = data.filter((card) => {
         // Return true only for cards that are not already in allCards
         return !allCards.some((c) => c.id === card.id);
       });
@@ -80,13 +80,19 @@ const Cards = ({ link }: { link: string }) => {
     return <NotFound />;
   }
 
+  let cardData: ProductsType[] = [];
+
+  if (Array.isArray(data)) {
+    // Если data массив, приводим его к типу ProductsType[]
+    cardData = data as ProductsType[];
+  }
   return (
     <>
       <div className="row">
         <Card data={allCards} />
       </div>
       <div className="text-center">
-        {data && data.length >= 6 && (
+        {cardData && cardData.length >= 6 && (
           <button className="btn btn-outline-primary" onClick={handleLoadMore}>
             Загрузить ещё
           </button>

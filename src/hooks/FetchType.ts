@@ -1,13 +1,5 @@
-import {ProductsType} from "../types/ProductsType.ts";
-import {CategoriesType} from "../types/CategoriesType.ts";
-
-export type FetchType = {
-    url: string;
-    options?: RequestInit;
-}
-
-export type FetchStatus = {
+export type FetchStatus<T> = {
     isLoading: boolean;
-    data: ProductsType | CategoriesType[] | undefined;
-    error: unknown | null; 
+    data: T | undefined;
+    error: Error | null;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ProductsCart from './ProductsCart.tsx';
 import OrderCart from './OrderCart.tsx';
 import { ProductCartType } from '../../../../types/CartTypes.ts';
+import EmptyCart from './EmptyCart.tsx';
 
 /**
  * Компонент корзины покупок.
@@ -17,16 +18,16 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState<ProductCartType[]>([]);
 
   /**
-   * Функция для извлечения данных из локального хранилища и установки их в состояние.
+   * Функция для извлечения данных из локального хранилища с поиском по ключу магазина и установкой их в состояние.
    * @returns {void}
    */
   const loadCartItems = () => {
-    const keys = Object.keys(localStorage);
-    const items = keys
-      .map(key => localStorage.getItem(key)) // Получаем все значения из localStorage
-      .filter(item => item !== null) // Отфильтровываем все null значения
-      .map(item => JSON.parse(item!)); // Преобразуем строки JSON в объекты
-
+    const itemsString = localStorage.getItem('bosonoga');
+    if (itemsString === null) {
+      setCartItems([]);
+      return;
+    }
+    const items = JSON.parse(itemsString);
     setCartItems(items);
   };
 
@@ -41,17 +42,22 @@ const Cart = () => {
    * @returns {void}
    */
   const handleDelete = (id: number) => {
-    localStorage.removeItem(id.toString());
-    loadCartItems();
+    const updatedCartItems = cartItems.filter(item => item.id !== id);
+    setCartItems(updatedCartItems);
+    localStorage.setItem('bosonoga', JSON.stringify(updatedCartItems));
   };
 
   return (
     <>
-      {cartItems && cartItems.length > 0 && (<ProductsCart data={cartItems} handleDelete={handleDelete} />)}
-      <OrderCart data={cartItems} />
+      {(cartItems && cartItems.length > 0) ?
+        (<>
+          <ProductsCart data={cartItems} handleDelete={handleDelete} />
+          <OrderCart data={cartItems} />
+        </>) :
+        <EmptyCart />
+      }
     </>
   );
-
 };
 
 export default Cart;

@@ -13,15 +13,14 @@ const Product = () => {
   const { id } = useParams();
   // Состояние для выбранного размера
   const [selectedSize, setSelectedSize] = useState<string>('');
-  //
+ // состояние для выбранного количества
   const [count, setCount] = useState<number>(1);
   // Состояние для активности кнопки "В корзину"
   const [isButtonActive, setIsButtonActive] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  //Custom hook for fetching data.
-  const { data, isLoading, error, fetchNow } = useFetch();
+  const { data, isLoading, error, fetchNow } = useFetch<ProductsType>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +49,23 @@ const Product = () => {
     return <Preloader />;
   }
 
+// Сохранение данных в локальное хранилище
   const handleSubmit = (data: ProductsType, selectedSize: string, count: number) => {
+    if(!isButtonActive) return;
+
     const { id, title, price } = data;
-    localStorage.setItem(`${id}`, JSON.stringify({ id, title, price, selectedSize, count }));
+    const newData = { id, title, price, selectedSize, count };
+
+    let name = Object.keys(localStorage).find(key => key === 'bosonoga');
+
+    if (name !== undefined) {
+      const existingData = JSON.parse(localStorage.getItem(name)!);
+      const updatedData = [...existingData, newData];
+      localStorage.setItem(name, JSON.stringify(updatedData));
+    } else {
+      name = 'bosonoga';
+      localStorage.setItem(name, JSON.stringify([newData])); // Оборачиваем newData в массив, так как это первые данные для этого ключа
+    }
     navigate(`/cart`);
   };
 

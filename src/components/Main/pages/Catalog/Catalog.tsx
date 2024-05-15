@@ -4,6 +4,7 @@ import Preloader from '../../Preloader/Preloader';
 import Cards from './Cards';
 import { NavLink, useParams } from 'react-router-dom';
 import CategoryList from './CategoryList';
+import { CategoriesType } from '../../../../types/CategoriesType.ts';
 
 /**
  * Component for displaying navigation categories and product cards.
@@ -18,7 +19,7 @@ const Catalog = () => {
   /**
    * Custom hook for fetching data.
    */
-  const { data, isLoading, error, fetchNow } = useFetch();
+  const { data, isLoading, error, fetchNow } = useFetch<CategoriesType[]>();
 
   /**
    * State to store the search query.

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import useFetch from "../../../../hooks/useFetch";
-import Preloader from "../../Preloader/Preloader";
-import NotFound from "../404";
-import Card from "../Catalog/Card";
+import { useEffect } from 'react';
+import useFetch from '../../../../hooks/useFetch';
+import Preloader from '../../Preloader/Preloader';
+import NotFound from '../404';
+import Card from '../Catalog/Card';
+import { ProductsType } from '../../../../types/ProductsType.ts';
 
 /**
  * Component representing the top sales section.
@@ -10,19 +11,10 @@ import Card from "../Catalog/Card";
  */
 
 const TopSales = () => {
-  /**
-   * Custom hook for fetching data.
-   * @type {Object}
-   * @property {Array<TopSalesType>} data - The fetched data.
-   * @property {boolean} isLoading - Indicates whether the data is loading.
-   * @property {Error | null} error - Any error that occurred during the fetch.
-   * @property {Function} fetchNow - Function to execute the fetch.
-   */
-
-  const { data, isLoading, error, fetchNow } = useFetch();
+  const { data, isLoading, error, fetchNow } = useFetch<ProductsType[]>();
 
   useEffect(() => {
-    fetchNow(import.meta.env.VITE_APP_TOP_SALES_URL, { method: "GET" });
+    fetchNow(import.meta.env.VITE_APP_TOP_SALES_URL, { method: 'GET' });
   }, []);
 
   return (
@@ -30,7 +22,9 @@ const TopSales = () => {
       <h2 className="text-center">Хиты продаж!</h2>
       {isLoading && <Preloader />}
       {error !== null && <NotFound />}
-      <div className="row">{data && <Card data={data} />}</div>
+      <div className="row">
+        {data && <Card data={data} />}
+      </div>
     </section>
   );
 };
