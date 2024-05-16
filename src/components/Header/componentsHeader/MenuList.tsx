@@ -27,8 +27,6 @@ const MenuList = () => {
       link: `/contacts`,
     },
   ];
-  console.log(location.pathname)
-
 
   return (
     <ul className="navbar-nav mr-auto">

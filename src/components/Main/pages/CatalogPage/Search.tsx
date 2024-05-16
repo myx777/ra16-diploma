@@ -12,7 +12,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (search !== undefined && search !== null && search !== '') {
+    if (search ) {
       setState(search);
     }
   }, [search]);

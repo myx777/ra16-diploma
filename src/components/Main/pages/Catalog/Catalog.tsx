@@ -38,9 +38,7 @@ const Catalog = () => {
 
   useEffect(() => {
     // Update the link when the search query changes.
-    if (finalSearch.length > 0) {
       setLink(`${import.meta.env.VITE_APP_ITEMS_URL}?${searchLink}`);
-    }
   }, [search]);
 
   /**
@@ -75,7 +73,6 @@ const Catalog = () => {
   if (error !== null) {
     return <Preloader />;
   }
-  console.log(location)
 
   return (
     <>
