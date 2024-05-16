@@ -2,9 +2,9 @@ import { useLocation } from 'react-router-dom';
 import MenuItems from '../../MenuItems/MenuItems';
 
 /**
- * Generates a list of menu items based on the current location at the header.
+ * Генерирует список элементов меню на основе текущего местоположения в заголовке.
  *
- * @return {JSX.Element} The JSX element representing the menu list.
+ * @return {JSX.Element} JSX элемент, представляющий список меню.
  */
 const MenuList = () => {
   const location = useLocation();
@@ -27,20 +27,28 @@ const MenuList = () => {
       link: `/contacts`,
     },
   ];
+  console.log(location.pathname)
+
 
   return (
     <ul className="navbar-nav mr-auto">
-      {items.map(({ label, link }) => (
-        <li
-          key={label}
-          className={`nav-item ${location.pathname === link ? 'active' : ''}`}
+      {items.map(({ label, link }) => {
+        const isActive =
+          link === '/' ? location.pathname === link : location.pathname.startsWith(link);
 
-        >
-          <MenuItems label={label} link={link} />
-        </li>
-      ))}
+
+        return (
+          <li
+            key={label}
+            className={`nav-item ${isActive ? 'active' : ''}`}
+          >
+            <MenuItems label={label} link={link} />
+          </li>
+        );
+      })}
     </ul>
   );
 };
 
 export default MenuList;
+

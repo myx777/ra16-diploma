@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useFetch from '../../../../hooks/useFetch';
 import Preloader from '../../Preloader/Preloader';
 import Cards from './Cards';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import CategoryList from './CategoryList';
 import { CategoriesType } from '../../../../types/CategoriesType.ts';
 
@@ -25,6 +25,7 @@ const Catalog = () => {
    * State to store the search query.
    */
   const { search } = useParams();
+  const location = useLocation();
 
   const finalSearch = search ? search : '';
 
@@ -74,6 +75,7 @@ const Catalog = () => {
   if (error !== null) {
     return <Preloader />;
   }
+  console.log(location)
 
   return (
     <>
@@ -82,13 +84,12 @@ const Catalog = () => {
           {/* Render "All" category */}
           <li
             key={'all'}
-            className={'nav-item'}
+            className='nav-item'
             onClick={(event) => handleClick('all', event)}
           >
-            <NavLink to={location.pathname.includes(`catalog`) ? `./category/all` : `/`}
-                     className={'nav-link'}>
+            <Link to='./' className={`nav-link ${!location.pathname.includes('/category/') ? 'active' : ''}`}>
               Все
-            </NavLink>
+            </Link>
           </li>
           {/* Render other categories */}
           {data && <CategoryList data={data} handleClick={handleClick} />}
